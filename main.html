@@ -21,20 +21,22 @@
       align-items: center;
       min-height: 100vh;
       font-family: 'Inter', sans-serif;
-      background: #090a0f; /* Background ya giza kwa ajili ya nyota */
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       overflow: hidden;
       color: #ffffff;
       position: relative;
     }
 
-    /* ========== STAR BACKGROUND ANIMATION ========== */
-    .stars-container {
+    /* ========== STAR & METEOR BACKGROUND CONTAINER ========== */
+    .sky-container {
       position: fixed;
       inset: 0;
       z-index: 0;
       pointer-events: none;
+      overflow: hidden;
     }
 
+    /* Nyota Zinazomeremeta (Twinkling Stars) */
     .star {
       position: absolute;
       background-color: #ffffff;
@@ -48,13 +50,52 @@
       100% { opacity: 0.2; transform: scale(0.8); }
     }
 
+    /* Vimondo / Nyota Zinazoanguka (Shooting Stars / Meteors) */
+    .shooting-star {
+      position: absolute;
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(-45deg, #ffffff, rgba(0, 242, 254, 0));
+      border-radius: 999px;
+      filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.8));
+      animation: shoot linear infinite;
+      opacity: 0;
+    }
+
+    .shooting-star::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0;
+      height: 4px;
+      width: 4px;
+      background: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #ffffff, 0 0 20px #00f2fe;
+    }
+
+    @keyframes shoot {
+      0% {
+        transform: translateX(0) translateY(0) rotate(-45deg);
+        opacity: 1;
+      }
+      70% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-600px) translateY(600px) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+
     /* ========== SCROLLING MARQUEE TEXT ========== */
     .marquee-container {
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(102, 126, 234, 0.2);
-      backdrop-filter: blur(5px);
+      background: rgba(102, 126, 234, 0.15);
+      backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       padding: 10px 0;
       z-index: 10;
@@ -418,8 +459,8 @@
     </div>
   </div>
 
-  <!-- ========== DYNAMIC STARS BACKGROUND ========== -->
-  <div class="stars-container" id="stars-container"></div>
+  <!-- ========== BACKGROUND WITH STARS AND SHOOTING METEORS ========== -->
+  <div class="sky-container" id="sky-container"></div>
 
   <!-- ========== MAIN CONTAINER ========== -->
   <div class="container">
@@ -471,20 +512,20 @@
   </div>
 
   <!-- ========== SCRIPTS ========== -->
-  <script src="https://cdnjs.cloudflare.com/axios/1.0.0-alpha.1/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
   <script>
-    // Script ya kutengeneza nyota zinazobadilika upande wa background
-    const starsContainer = document.getElementById('stars-container');
-    const numberOfStars = 80;
+    const skyContainer = document.getElementById('sky-container');
 
+    // 1. Kutengeneza Nyota Zinazomeremeta
+    const numberOfStars = 90;
     for (let i = 0; i < numberOfStars; i++) {
       const star = document.createElement('div');
       star.classList.add('star');
       
-      const size = Math.random() * 3 + 1; // Ukubwa wa nyota (1px - 4px)
+      const size = Math.random() * 3 + 1;
       const posX = Math.random() * 100;
       const posY = Math.random() * 100;
-      const duration = Math.random() * 3 + 1.5; // Kasi ya kumeremeta
+      const duration = Math.random() * 3 + 1.5;
       const delay = Math.random() * 3;
 
       star.style.width = `${size}px`;
@@ -494,7 +535,26 @@
       star.style.animationDuration = `${duration}s`;
       star.style.animationDelay = `${delay}s`;
 
-      starsContainer.appendChild(star);
+      skyContainer.appendChild(star);
+    }
+
+    // 2. Kutengeneza Vimondo / Nyota Zinazoanguka
+    const numberOfMeteors = 6;
+    for (let i = 0; i < numberOfMeteors; i++) {
+      const meteor = document.createElement('div');
+      meteor.classList.add('shooting-star');
+      
+      const posX = Math.random() * 100 + 20; // Anzia kutoka kulia juu
+      const posY = Math.random() * 50; 
+      const duration = Math.random() * 2 + 2; // Kasi ya kuanzia sekunde 2 - 4
+      const delay = Math.random() * 6; // Muda tofauti wa kuanguka
+
+      meteor.style.left = `${posX}%`;
+      meteor.style.top = `${posY}%`;
+      meteor.style.animationDuration = `${duration}s`;
+      meteor.style.animationDelay = `${delay}s`;
+
+      skyContainer.appendChild(meteor);
     }
 
     // Logic za Pairing Code
