@@ -1,0 +1,46 @@
+{
+  "name": "njabulomini-bot",
+  "description": "🤖 WhatsApp Bot with commands folder support",
+  "repository": "https://github.com/NjabuloJf/njabuloo-minibot",
+  "logo": "https://files.catbox.moe/dfe0h0.jpg",
+  "keywords": [
+    "whatsapp-bot",
+    "nodejs",
+    "baileys",
+    "whatsapp",
+    "bot",
+    "njabulomini"
+  ],
+  "env": {
+    "PORT": {
+      "value": "10000"
+    },
+    "NODE_ENV": {
+      "value": "production"
+    },
+    "OWNER_NUMBER": {
+      "value": "255753668403"
+    },
+    "BOT_NAME": {
+      "value": "njabulomini-bot"
+    },
+    "NPM_CONFIG_LEGACY_PEER_DEPS": {
+      "value": "true"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-activestorage-preview"
+    },
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "stack": "heroku-26"
+}

@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>njabulomini-bot | Pair</title>
+  <link rel="icon" type="jpg" href="https://raw.githubusercontent.com/NjabuloJf/njabulo-data/main/njabuloimg/njabuloimg3.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      overflow: hidden;
+      color: #1a1a2e;
+      position: relative;
+    }
+
+    /* ========== ANIMATED GRID BACKGROUND ========== */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: 
+        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    /* ========== GLOWING DOTS ========== */
+    .dot-grid {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image: radial-gradient(circle, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+      background-size: 30px 30px;
+      animation: dotPulse 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes dotPulse {
+      0% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    /* ========== CONTAINER ========== */
+    .container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+    }
+
+    /* ========== BOT AVATAR ========== */
+    .bot-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      color: white;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+      animation: float 4s ease-in-out infinite;
+      transition: transform 0.3s;
+    }
+
+    .bot-avatar:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* ========== MAIN CARD ========== */
+    .box {
+      width: 420px;
+      max-width: 95%;
+      padding: 40px 35px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.06),
+        0 8px 24px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .box:hover {
+      box-shadow: 
+        0 30px 80px rgba(102, 126, 234, 0.10),
+        0 10px 30px rgba(0, 0, 0, 0.06);
+      transform: translateY(-2px);
+    }
+
+    /* ========== DECORATIVE LINE ========== */
+    .decorative-line {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      margin: 8px auto 16px;
+      border-radius: 10px;
+    }
+
+    /* ========== TITLE ========== */
+    .title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #1a1a2e;
+      letter-spacing: -0.5px;
+    }
+
+    .title span {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      color: #6b7280;
+      font-weight: 400;
+      margin-top: 4px;
+      letter-spacing: 0.3px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-top: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ========== INPUT CONTAINER ========== */
+    .input-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      margin-top: 22px;
+      background: #f8f9fc;
+      border-radius: 16px;
+      padding: 6px 6px 6px 18px;
+      border: 2px solid #e8ecf4;
+      transition: all 0.3s ease;
+    }
+
+    .input-container:focus-within {
+      border-color: #667eea;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+      background: #ffffff;
+    }
+
+    .input-container i {
+      color: #9ca3af;
+      font-size: 1rem;
+    }
+
+    .input-container input {
+      flex: 1;
+      border: none;
+      padding: 14px 0;
+      font-size: 1rem;
+      font-weight: 500;
+      outline: none;
+      background: transparent;
+      color: #1a1a2e;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .input-container input::placeholder {
+      color: #9ca3af;
+      font-weight: 400;
+    }
+
+    .input-container input::-webkit-outer-spin-button,
+    .input-container input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .input-container input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    .input-container button {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      letter-spacing: 0.3px;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .input-container button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .input-container button:active {
+      transform: scale(0.97);
+    }
+
+    /* ========== MESSAGES ========== */
+    #waiting-message {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: #667eea;
+      font-weight: 500;
+      display: none;
+      animation: pulseText 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulseText {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    #pair {
+      margin-top: 16px;
+      font-size: 1rem;
+      color: #1a1a2e;
+      font-weight: 600;
+      word-break: break-all;
+    }
+
+    #pair .code-label {
+      color: #6b7280;
+      font-weight: 400;
+      font-size: 0.85rem;
+    }
+
+    #pair .code-value {
+      color: #764ba2;
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: 2px;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: #f3f0ff;
+      display: inline-block;
+      transition: all 0.3s ease;
+      border: 2px dashed #d4c9f0;
+    }
+
+    #pair .code-value:hover {
+      background: #e8e0ff;
+      border-color: #764ba2;
+      transform: scale(1.02);
+    }
+
+    /* ========== COPY BUTTON ========== */
+    #copy-btn {
+      display: none;
+      margin-top: 16px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      padding: 12px 32px;
+      border-radius: 12px;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+      letter-spacing: 0.3px;
+    }
+
+    #copy-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+    }
+
+    #copy-btn:active {
+      transform: scale(0.97);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      margin-top: 22px;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .footer .heart {
+      color: #ef4444;
+      animation: heartBeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .footer a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .footer a:hover {
+      color: #764ba2;
+    }
+
+    .footer .dot {
+      color: #d1d5db;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 480px) {
+      .box {
+        padding: 28px 20px;
+      }
+      .title {
+        font-size: 1.1rem;
+      }
+      .input-container {
+        flex-direction: column;
+        padding: 8px;
+        gap: 8px;
+        border-radius: 14px;
+      }
+      .input-container input {
+        width: 100%;
+        padding: 12px 16px;
+        background: #f1f3f8;
+        border-radius: 10px;
+      }
+      .input-container button {
+        width: 100%;
+        justify-content: center;
+        padding: 14px;
+      }
+      .bot-avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 38px;
+      }
+      #pair .code-value {
+        font-size: 1rem;
+        padding: 6px 12px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .box {
+        padding: 20px 14px;
+      }
+      .title {
+        font-size: 0.95rem;
+      }
+      .subtitle {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== BACKGROUND GRID ========== -->
+  <div class="grid-bg"></div>
+  <div class="dot-grid"></div>
+
+  <!-- ========== MAIN CONTAINER ========== -->
+  <div class="container">
+    <div class="box" id="box">
+
+      <!-- Bot Avatar -->
+      <div class="bot-avatar">
+        <i class="fas fa-robot"></i>
+      </div>
+
+      <!-- Title -->
+      <div class="title">
+        <span>njabulomini</span> bot
+      </div>
+      <div class="decorative-line"></div>
+      <div class="subtitle">pair your WhatsApp number</div>
+      <span class="badge"><i class="fas fa-bolt"></i> live</span>
+
+      <!-- Input -->
+      <div class="input-container">
+        <i class="fas fa-phone-alt"></i>
+        <input type="number" id="number" placeholder="26777821911" autofocus>
+        <button id="submit">
+          <i class="fas fa-link" style="margin-right: 6px;"></i> Pair
+        </button>
+      </div>
+
+      <!-- Messages -->
+      <div id="waiting-message">
+        <i class="fas fa-spinner fa-spin"></i> Generating code...
+      </div>
+
+      <div id="pair"></div>
+
+      <button id="copy-btn">
+        <i class="fas fa-copy" style="margin-right: 6px;"></i> Copy Code
+      </button>
+
+      <!-- Footer -->
+      <div class="footer">
+        <span>© 2026</span>
+        <span class="dot">•</span>
+        <span>Made with <span class="heart">❤</span> by <a href="#" target="_blank">Njabulo JB</a></span>
+        <span class="dot">•</span>
+        <span>v1.0</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+  <script>
+    const pairDiv = document.getElementById("pair");
+    const submitBtn = document.getElementById("submit");
+    const numberInput = document.getElementById("number");
+    const waitingMsg = document.getElementById("waiting-message");
+    const copyBtn = document.getElementById("copy-btn");
+
+    let currentCode = '';
+
+    async function copyCode() {
+      if (!currentCode) return;
+      try {
+        await navigator.clipboard.writeText(currentCode);
+        copyBtn.innerHTML = '<i class="fas fa-check" style="margin-right:6px;"></i> Copied!';
+        copyBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+        setTimeout(() => {
+          copyBtn.innerHTML = '<i class="fas fa-copy" style="margin-right:6px;"></i> Copy Code';
+        }, 2000);
+      } catch (err) {
+        alert('Failed to copy. Please select and copy manually.');
+      }
+    }
+
+    submitBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const rawNumber = numberInput.value.trim();
+
+      if (!rawNumber) {
+        pairDiv.innerHTML = `
+          <div style="color:#ef4444; font-weight:600; padding:8px 0;">
+            <i class="fas fa-exclamation-circle"></i> Enter your WhatsApp number
+          </div>
+        `;
+        return;
+      }
+
+      const cleanNumber = rawNumber.replace(/[^0-9]/g, "");
+      if (cleanNumber.length < 10) {
+        pairDiv.innerHTML = `
+          <div style="color:#ef4444; font-weight:600; padding:8px 0;">
+            <i class="fas fa-times-circle"></i> Invalid number — include country code
+          </div>
+        `;
+        return;
+      }
+
+      // Show waiting
+      waitingMsg.style.display = "block";
+      pairDiv.innerHTML = "";
+      copyBtn.style.display = "none";
+
+      try {
+        const response = await axios.get(`/code?number=${cleanNumber}`);
+        const code = response.data.code || "⚠️ Service unavailable";
+
+        currentCode = code;
+
+        pairDiv.innerHTML = `
+          <div style="margin-top:4px;">
+            <div class="code-label"><i class="fas fa-key"></i> Your pairing code</div>
+            <div class="code-value" id="code-display" onclick="copyCode()">${code}</div>
+            <div style="font-size:0.7rem; color:#9ca3af; margin-top:4px;">⬆️ click to copy</div>
+          </div>
+        `;
+
+        copyBtn.style.display = "inline-block";
+        copyBtn.innerHTML = '<i class="fas fa-copy" style="margin-right:6px;"></i> Copy Code';
+        copyBtn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+        copyBtn.onclick = copyCode;
+
+        waitingMsg.style.display = "none";
+
+      } catch (err) {
+        waitingMsg.style.display = "none";
+        pairDiv.innerHTML = `
+          <div style="color:#ef4444; font-weight:500; padding:8px 0;">
+            <i class="fas fa-exclamation-triangle"></i> Server error — try again
+          </div>
+        `;
+        console.error("Pair error:", err);
+      }
+    });
+
+    // Enter key support
+    numberInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") submitBtn.click();
+    });
+
+    // Auto-focus on load
+    setTimeout(() => numberInput.focus(), 300);
+  </script>
+</body>
+</html>
