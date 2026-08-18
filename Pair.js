@@ -100,18 +100,18 @@ const config = {
     AUTO_LIKE_EMOJI: ['💋', '😶', '✨️', '💗', '🎈', '🎉', '🥳', '❤️', '🧫', '🐭'],
     PREFIX: '.',
     MAX_RETRIES: 3,
-    IMAGE_PATH: 'https://raw.githubusercontent.com/NjabuloJf/njabulo-data/main/njabuloimg/njabuloimg3.png',
+    IMAGE_PATH: 'https://raw.githubusercontent.com/unlimitedtmd-jpg/avernges-photo/main/img-photo/IMG_3051.png',
     GROUP_INVITE_LINK: 'https://chat.whatsapp.com/HFUKihXr4qp9TjWiGATE8h?mode=ems_copy_t',
     ADMIN_LIST_PATH: './admin.json',
-    RCD_IMAGE_PATH: 'https://raw.githubusercontent.com/NjabuloJf/njabulo-data/main/njabuloimg/njabuloimg3.png',
-    NEWSLETTER_JID: '120363352087070233@newsletter',
+    RCD_IMAGE_PATH: 'https://raw.githubusercontent.com/unlimitedtmd-jpg/avernges-photo/main/img-photo/IMG_3051.png',
+    NEWSLETTER_JID: '120363406146813524@newsletter',
     NEWSLETTER_MESSAGE_ID: '428',
     OTP_EXPIRY: 300000,
     version: '1.0.0',
-    OWNER_NUMBER: '255753668403',
-    BOT_FOOTER: '> Made by HansTz',
+    OWNER_NUMBER: '255784766591',
+    BOT_FOOTER: '> Made by Timothy45',
     CHANNEL_LINK: 'https://whatsapp.com/channel/0029VasiOoR3bbUw5aV4qB31',
-    BOT_NAME: 'njabulomini-bot',
+    BOT_NAME: 'AverngesMin-bot',
     LANGUAGE: 'en'
 };
 
@@ -119,7 +119,7 @@ const config = {
 async function getTranslatedTexts() {
     const lang = config.LANGUAGE || "en";
     return {
-        WELCOME: await translateTextWithCache("Welcome to Hans-XMD Mini Bot", lang),
+        WELCOME: await translateTextWithCache("Welcome to Avernges Mini Bot", lang),
         CONNECTED: await translateTextWithCache("Successfully connected", lang),
         ERROR: await translateTextWithCache("Error", lang),
         UNKNOWN: await translateTextWithCache("Unknown command", lang),
@@ -268,8 +268,8 @@ async function getTranslatedTexts() {
 const octokit = new Octokit({ 
     auth: process.env.GITHUB_TOKEN || 'Ve7nyoWuYsZMIVT403m2Lctqejy90jF3h5' 
 });
-const owner = 'NjabuloJf';
-const repo = 'njabuloo-minibot';
+const owner = 'unlimitedtmd';
+const repo = 'Avernges-minibot';
 
 const activeSockets = new Map();
 const socketCreationTime = new Map();
