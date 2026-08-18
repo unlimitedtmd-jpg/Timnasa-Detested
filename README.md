@@ -32,7 +32,7 @@
 
   <!-- Button Kubwa ya Blue ya Deploy na Create Account -->
   <p>
-    <a href="https://heroku.com/deploy?template=“https://github.com/unlimitedtmd-jpg/Timnasa-Detested">
+    <a href="https://heroku.com/deploy?template=https://github.com/unlimitedtmd-jpg/Timnasa-Detested">
       <img src="https://img.shields.io/badge/DEPLOY%20TO%20HEROKU-007BFF?style=for-the-badge&logo=heroku&logoColor=white" alt="Deploy to Heroku" height="50">
     </a>
   </p>
